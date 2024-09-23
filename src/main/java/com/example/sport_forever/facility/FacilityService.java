@@ -12,7 +12,7 @@ import com.example.sport_forever.common.repository.ReservationRepository;
 import com.example.sport_forever.common.repository.UserRepository;
 import com.example.sport_forever.facility.dto.EndDto;
 import com.example.sport_forever.facility.dto.ReservationDto;
-import com.example.sport_forever.facility.dto.ReservationResponseEntity;
+import com.example.sport_forever.facility.dto.ReservationResponseDto;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -136,7 +136,7 @@ public class FacilityService {
         return facilityRepository.findAll();
     }
 
-    public ReservationResponseEntity getReservation() {
+    public ReservationResponseDto getReservation() {
         Optional<UserEntity> optionalUserEntity = userRepository.findUserEntityByPhoneNumber(getCurrentMemberId());
         if(optionalUserEntity.isEmpty()) {
             throw new SportException(CommunalResponse.USER_NOT_FOUND);
@@ -149,7 +149,7 @@ public class FacilityService {
             throw new SportException(CommunalResponse.RESERVATION_NOT_FOUND);
         }
 
-        return new ReservationResponseEntity(
+        return new ReservationResponseDto(
                 optionalReservationEntity.get().getFacilityEntity().getName(),
                 optionalReservationEntity.get().getActivate(),
                 optionalReservationEntity.get().getReservationTime(),

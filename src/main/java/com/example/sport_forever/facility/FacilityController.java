@@ -3,7 +3,7 @@ package com.example.sport_forever.facility;
 import com.example.sport_forever.common.entity.FacilityEntity;
 import com.example.sport_forever.facility.dto.EndDto;
 import com.example.sport_forever.facility.dto.ReservationDto;
-import com.example.sport_forever.facility.dto.ReservationResponseEntity;
+import com.example.sport_forever.facility.dto.ReservationResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -59,7 +59,7 @@ public class FacilityController {
             description = "운동 시설을 예약했는지 조회하고, 예약 정보를 반환합니다."
     )
     @GetMapping("/reservation")
-    public ReservationResponseEntity getReservation() {
+    public ReservationResponseDto getReservation() {
         return facilityService.getReservation();
     }
 }
