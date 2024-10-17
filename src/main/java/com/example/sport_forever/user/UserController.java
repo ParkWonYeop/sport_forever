@@ -26,14 +26,4 @@ public class UserController {
     public UserResponseDto getUserInfo() {
         return userService.getUserInfo();
     }
-
-    @Operation(
-            operationId = "비밀번호 변경",
-            summary = "현재 로그인 되어있는 유저 비밀번호를 변경합니다.",
-            description = "현재 로그인 되어있는 유저 비밀번호를 변경합니다."
-    )
-    @PutMapping("/password")
-    public void changePassword() {
-
-    }
 }

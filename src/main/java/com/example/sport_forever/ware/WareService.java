@@ -161,4 +161,19 @@ public class WareService {
     public List<WareEntity> getWareList() {
         return wareRepository.findAll();
     }
+
+    @Transactional
+    public void activeRental(Long rentalId) {
+        Optional<RentalEntity> optionalRentalEntity = rentalRepository.findById(rentalId);
+
+        if (optionalRentalEntity.isEmpty()) {
+            throw new SportException(CommunalResponse.RENTAL_NOT_FOUND);
+        }
+
+        RentalEntity rentalEntity = optionalRentalEntity.get();
+
+        rentalEntity.setActivate(true);
+
+        rentalRepository.save(rentalEntity);
+    }
 }

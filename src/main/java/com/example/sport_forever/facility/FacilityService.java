@@ -2,10 +2,7 @@ package com.example.sport_forever.facility;
 
 import com.example.sport_forever.common.controller.SportException;
 import com.example.sport_forever.common.controller.constant.CommunalResponse;
-import com.example.sport_forever.common.entity.BanEntity;
-import com.example.sport_forever.common.entity.FacilityEntity;
-import com.example.sport_forever.common.entity.ReservationEntity;
-import com.example.sport_forever.common.entity.UserEntity;
+import com.example.sport_forever.common.entity.*;
 import com.example.sport_forever.common.repository.BanRepository;
 import com.example.sport_forever.common.repository.FacilityRepository;
 import com.example.sport_forever.common.repository.ReservationRepository;
@@ -155,5 +152,19 @@ public class FacilityService {
                 optionalReservationEntity.get().getReservationTime(),
                 optionalReservationEntity.get().getEndTime()
         );
+    }
+
+    public void activeReservation(Long reservationId) {
+        Optional<ReservationEntity> optionalReservationEntity = reservationRepository.findById(reservationId);
+
+        if (optionalReservationEntity.isEmpty()) {
+            throw new SportException(CommunalResponse.RESERVATION_NOT_FOUND);
+        }
+
+        ReservationEntity reservationEntity =  optionalReservationEntity.get();
+
+        reservationEntity.setActivate(true);
+
+        reservationRepository.save(reservationEntity);
     }
 }

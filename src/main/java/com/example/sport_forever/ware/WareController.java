@@ -1,6 +1,7 @@
 package com.example.sport_forever.ware;
 
 import com.example.sport_forever.common.entity.WareEntity;
+import com.example.sport_forever.community.dto.PostResponseDto;
 import com.example.sport_forever.ware.dto.RentalDto;
 import com.example.sport_forever.ware.dto.RentalResponseDto;
 import com.example.sport_forever.ware.dto.ReturnDto;
@@ -61,5 +62,15 @@ public class WareController {
     @GetMapping()
     public List<WareEntity> getWareList() {
         return rentalWareService.getWareList();
+    }
+
+    @Operation(
+            operationId = "대여 활성화",
+            summary = "대여를 활성화 합니다.",
+            description = "대여를 활성화 합니다."
+    )
+    @PutMapping("/rental")
+    public void activeRental(@RequestParam Long rentalId) {
+         rentalWareService.activeRental(rentalId);
     }
 }

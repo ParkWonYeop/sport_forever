@@ -62,4 +62,14 @@ public class FacilityController {
     public ReservationResponseDto getReservation() {
         return facilityService.getReservation();
     }
+
+    @Operation(
+            operationId = "예약 활성화",
+            summary = "예약을 활성화 합니다.",
+            description = "예약을 활성화 합니다."
+    )
+    @PutMapping("/reservation")
+    public void activeReservation(@RequestParam Long reservationId) {
+        facilityService.activeReservation(reservationId);
+    }
 }
